@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>String Comparison Methods in JavaScript</h1>
+
+    <label for="s1">Enter first string:</label>
+    <input type="text" id="s1" placeholder="First string" /><br /><br />
+
+    <label for="s2">Enter second string:</label>
+    <input type="text" id="s2" placeholder="Second string" /><br /><br />
+
+    <button onclick="comaparestring() ">Compare Strings</button>
+    <p id="result"></p>
+
+    <script>
+      function comaparestring() {
+        let s1 = document.getElementById("s1").value;
+        let s2 = document.getElementById("s2").value;
+
+        let resultmessage = "";
+        if (s1 !== s2) {
+          resultmessage += "strings are not equal";
+        } else {
+          resultmessage += "strings are equal";
+        }
+
+        if (s1.length === s2.length) {
+          resultmessage += "Both strings have the same length.<br>";
+        } else if (s1.length > s2.length) {
+          resultmessage += `"${s1}" is longer than "${s2}".<br>`;
+        } else {
+          resultmessage += `"${s1}" is less than "${s2}".<br>`;
+        }
+
+        let comp = s1.localeCompare(s2);
+        if (comp === 0) {
+          resultmessage += "Both strings alphabetically equal.<br>";
+        } else if (comp < 0) {
+          resultmessage += `"${s1}" comes before "${string2}".<br>`;
+        } else {
+          resultmessage += `"${s1}" comes after "${string2}".<br>`;
+        }
+
+        document.getElementById("result").innerHTML = resultmessage;
+      }
+    </script>
+  </body>
+</html>

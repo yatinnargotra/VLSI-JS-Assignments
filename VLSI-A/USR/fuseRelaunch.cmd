@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -o "D:/BE42359/USR/usr_tb_isim_beh.exe" -prj "D:/BE42359/USR/usr_tb_beh.prj" "work.usr_tb" 

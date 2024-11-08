@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page - Event Handlers</title>
+</head>
+<body>
+    <h1>Experiment 8</h1>
+    <h2>Welcome to the Home Page</h2>
+    <p>Move your mouse over the button or focus on the input field to see the background change.</p>
+    <button type="button" id="hoverButton">Hover over me</button>
+    <input type="text" id="focusField" placeholder="Focus on me">
+
+    <script>
+        const body = document.body;
+        const hoverButton = document.getElementById("hoverButton");
+        const focusField = document.getElementById("focusField");
+        
+        hoverButton.onmouseover = () => {
+            body.style.backgroundColor = "#162c19";
+        };
+        hoverButton.onmouseout = () => {
+            body.style.backgroundColor = "#f0f0f0";
+        };
+        focusField.onfocus = () => {
+            body.style.backgroundColor = "#79b1d8";
+        };
+        focusField.onblur = () => {
+            body.style.backgroundColor = "#f0f0f0";
+        };
+    </script>
+</body>
+</html>

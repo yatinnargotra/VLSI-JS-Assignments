@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Array Operations</title>
+    <script>
+      let array = [];
+
+      function perfops() {
+        const arrayLength = parseInt(
+          document.getElementById("arrayLength").value
+        );
+        const arrayElements = document
+          .getElementById("arrayElements")
+          .value.split(",");
+        const deleteElement = document
+          .getElementById("deleteElements")
+          .value.trim();
+        const checkElement = document
+          .getElementById("checkElements")
+          .value.trim();
+
+        if (arrayElements.length !== arrayLength) {
+          alert("Array length does not match the number of elements provided");
+          return;
+        }
+
+        array = arrayElements.map((element) => element.trim());
+
+        removeElement(array, deleteElement);
+        checkIfExists(array, checkElement);
+        removeElementManually(array, deleteElement);
+        checkIfExistsManually(array, checkElement);
+
+        document.getElementById(
+          "outputArray"
+        ).textContent = `Array: [${array}]`;
+      }
+
+      function removeElement(array, element) {
+        const index = array.indexOf(element);
+        if (index !== -1) {
+          array.splice(index, 1);
+        } else {
+          alert(`Element "${element}" not found in the array.`);
+        }
+      }
+
+      function checkIfExists(array, element) {
+        const result = array.includes(element);
+        document.getElementById("checkResult").textContent = result
+          ? `Element "${element}" exists in the array.`
+          : `Element "${element}" does not exist in the array.`;
+      }
+
+      function removeElementManually(array, element) {
+        let newArray = [];
+        for (let i = 0; i < array.length; i++) {
+          if (array[i] !== element) {
+            newArray.push(array[i]);
+          }
+        }
+        array.length = 0;
+        for (let i = 0; i < newArray.length; i++) {
+          array.push(newArray[i]);
+        }
+      }
+
+      function checkIfExistsManually(array, element) {
+        let exists = false;
+        for (let i = 0; i < array.length; i++) {
+          if (array[i] === element) {
+            exists = true;
+            break;
+          }
+        }
+        document.getElementById("checkResult").textContent = exists
+          ? `Element "${element}" exists in the array. (Manual Check)`
+          : `Element "${element}" does not exist in the array. (Manual Check)`;
+      }
+
+      function emptyArray() {
+        array.length = 0;
+        document.getElementById("outputArray").textContent = "Array: []";
+        document.getElementById("checkResult").textContent = "";
+      }
+    </script>
+  </head>
+  <body>
+    <h1>JavaScript Array Operations</h1>
+
+    <form id="arrayForm">
+      <label for="arrayLength">Array Length:</label>
+      <input
+        type="number"
+        id="arrayLength"
+        placeholder="Enter array Length"
+        required
+      />
+      <label for="arrayElements">Enter Array Elements (comma-separated):</label>
+      <input
+        type="text"
+        id="arrayElements"
+        placeholder="Enter array elements"
+        required
+      />
+      <label for="deleteElement">Element to Delete:</label>
+      <input
+        type="text"
+        id="deleteElements"
+        placeholder="Enter element to delete"
+        required
+      />
+      <label for="checkElement">Element to Check:</label>
+      <input
+        type="text"
+        id="checkElements"
+        placeholder="Enter element to check"
+        required
+      />
+      <button type="button" onclick="perfops()">Perform Operations</button>
+      <button type="button" onclick="emptyArray()">Empty Array</button>
+
+      <h3>Array After Operations</h3>
+      <p id="outputArray">Array: []</p>
+      <p id="checkResult"></p>
+    </form>
+  </body>
+</html>

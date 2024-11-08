@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Array Operations</title>
+  </head>
+  <body>
+    <h1>Array Operations</h1>
+
+    <!-- Initialize Array -->
+    <div>
+      <label for="size">Array Size:</label>
+      <input type="number" id="size" placeholder="Enter array size" /><br />
+
+      <label for="elements">Array Elements (comma-separated):</label>
+      <input
+        type="text"
+        id="elements"
+        placeholder="Enter elements, e.g., 1,2,3"
+      /><br />
+
+      <button onclick="initializeArray()">Initialize Array</button>
+    </div>
+
+    <!-- Append Object -->
+    <div>
+      <label for="objectInput">Enter Key-Value (key:value):</label>
+      <input type="text" id="objectInput" placeholder="e.g., name:John" /><br />
+
+      <button onclick="pushObject()">Push Object</button>
+    </div>
+
+    <!-- Append Array -->
+    <div>
+      <label for="arrayInput">Enter Array to Append (comma-separated):</label>
+      <input type="text" id="arrayInput" placeholder="e.g., a,b,c" /><br />
+
+      <button onclick="pushArray()">Push Array</button>
+    </div>
+
+    <!-- Check Last Element -->
+    <div>
+      <button onclick="checkIsArray()">
+        Check if Last Element is an Array
+      </button>
+    </div>
+
+    <!-- Display Results -->
+    <h3>Result:</h3>
+    <p id="result"></p>
+
+    <script>
+      let arr = []; // Global array
+
+      // Function to initialize the array based on user input
+      function initializeArray() {
+        let size = parseInt(document.getElementById("size").value);
+        let elements = document.getElementById("elements").value.split(",");
+
+        // Check if the size matches the number of elements
+        if (elements.length !== size) {
+          document.getElementById("result").innerHTML =
+            "Size and number of elements don't match.";
+          return;
+        }
+
+        // Initialize the array
+        arr = elements.map((e) => e.trim());
+        document.getElementById(
+          "result"
+        ).innerHTML = `Initialized array: [${arr}]`;
+      }
+
+      // Function to append an object (key-value) to the array
+      function pushObject() {
+        let objectInput = document.getElementById("objectInput").value;
+        let [key, value] = objectInput.split(":"); // Extract key and value from input
+
+        if (!key || !value) {
+          document.getElementById("result").innerHTML =
+            "Invalid key-value pair.";
+          return;
+        }
+
+        let obj = {};
+        obj[key.trim()] = value.trim(); // Create object from key-value pair
+        arr.push(obj); // Append object to array
+
+        document.getElementById(
+          "result"
+        ).innerHTML = `After pushing object: ${JSON.stringify(arr)}`;
+      }
+
+      // Function to append an array to the existing array
+      function pushArray() {
+        let arrayInput = document.getElementById("arrayInput").value.split(",");
+        let newArray = arrayInput.map((e) => e.trim()); // Create array from input
+
+        arr.push(newArray); // Append new array to the existing array
+
+        // Display the nested array using JSON.stringify to preserve nested structure
+        document.getElementById(
+          "result"
+        ).innerHTML = `After pushing array: ${JSON.stringify(arr)}`;
+      }
+
+      // Function to check if the last element in the array is an array
+      function checkIsArray() {
+        let lastElement = arr[arr.length - 1]; // Get last element
+        let isArray = Array.isArray(lastElement); // Check if it's an array
+
+        document.getElementById(
+          "result"
+        ).innerHTML = `Is the last element an array? ${isArray}`;
+      }
+    </script>
+  </body>
+</html>

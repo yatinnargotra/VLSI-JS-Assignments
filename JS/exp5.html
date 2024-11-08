@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+</head>
+<body>
+    <h1>Countdown Timer</h1>
+    <input id="days" type="number" placeholder="Days">
+    <input id="hours" type="number" placeholder="Hours">
+    <input id="minutes" type="number" placeholder="Minutes">
+    <input id="seconds" type="number" placeholder="Seconds">
+    <button onclick="startTimer()">Start Countdown</button>
+    <p id="display-timer"></p>
+
+    <script>
+        let total_time;
+
+        function startTimer() {
+            clearInterval(total_time);
+
+            let days = parseInt(document.getElementById("days").value) || 0;
+            let hours = parseInt(document.getElementById("hours").value) || 0;
+            let minutes = parseInt(document.getElementById("minutes").value) || 0;
+            let seconds = parseInt(document.getElementById("seconds").value) || 0;
+
+            let totalSeconds = days * 86400 + hours * 3600 + minutes * 60 + seconds;
+
+            total_time = setInterval(function () {
+                if (totalSeconds <= 0) {
+                    clearInterval(total_time);
+                    document.getElementById("display-timer").innerHTML = "Expired";
+                    return;
+                }
+
+                let d = Math.floor(totalSeconds / 86400);
+                let h = Math.floor((totalSeconds % 86400) / 3600);
+                let m = Math.floor((totalSeconds % 3600) / 60);
+                let s = totalSeconds % 60;
+
+                document.getElementById("display-timer").innerHTML =
+                    d + "d " + h + "h " + m + "m " + s + "s ";
+                totalSeconds--;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Experiment1</title>
+    <script>
+      function showFields() {
+        const shape = document.getElementById("shape").value.toLowerCase();
+        document.getElementById("triangleFields").style.display = "none";
+        document.getElementById("rectangleFields").style.display = "none";
+        document.getElementById("circleFields").style.display = "none";
+
+        if (shape === "triangle") {
+          document.getElementById("triangleFields").style.display = "block";
+        } else if (shape === "rectangle") {
+          document.getElementById("rectangleFields").style.display = "block";
+        } else if (shape === "circle") {
+          document.getElementById("circleFields").style.display = "block";
+        }
+      }
+
+      function calculateArea() {
+        let shape = document.getElementById("shape").value.toLowerCase();
+
+        if (shape === "triangle") {
+          let a = parseFloat(document.getElementById("sideA").value);
+          let b = parseFloat(document.getElementById("sideB").value);
+          let c = parseFloat(document.getElementById("sideC").value);
+          let s = (a + b + c) / 2;
+          let area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+          alert("Area of Triangle is: " + area.toFixed(2));
+        } else if (shape === "rectangle") {
+          let length = parseFloat(document.getElementById("length").value);
+          let breadth = parseFloat(document.getElementById("breadth").value);
+          let area = length * breadth;
+          alert("Area of Rectangle is: " + area.toFixed(2));
+        } else if (shape === "circle") {
+          let radius = parseFloat(document.getElementById("radius").value);
+          let area = Math.PI * Math.pow(radius, 2);
+          alert("Area of Circle is: " + area.toFixed(2));
+        } else {
+          alert("Invalid shape! Please enter triangle, rectangle, or circle.");
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Area Calculator</h1>
+    <p>
+      Choose a shape (Triangle, Rectangle, or Circle) and input its dimensions
+      to calculate the area.
+    </p>
+
+    <label for="shape">Enter Shape: </label>
+    <input
+      type="text"
+      id="shape"
+      placeholder="e.g., Triangle"
+      oninput="showFields()"
+    />
+
+    <!-- Triangle Fields -->
+    <div id="triangleFields" style="display: none">
+      <label for="sideA">Side A:</label>
+      <input type="number" id="sideA" /><br />
+      <label for="sideB">Side B:</label>
+      <input type="number" id="sideB" /><br />
+      <label for="sideC">Side C:</label>
+      <input type="number" id="sideC" /><br />
+    </div>
+
+    <!-- Rectangle Fields -->
+    <div id="rectangleFields" style="display: none">
+      <label for="length">Length:</label>
+      <input type="number" id="length" /><br />
+      <label for="breadth">Breadth:</label>
+      <input type="number" id="breadth" /><br />
+    </div>
+
+    <!-- Circle Fields -->
+    <div id="circleFields" style="display: none">
+      <label for="radius">Radius:</label>
+      <input type="number" id="radius" /><br />
+    </div>
+
+    <button onclick="calculateArea()">Calculate Area</button>
+  </body>
+</html>

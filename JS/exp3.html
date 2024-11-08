@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Manipulation</title>
+</head>
+<body>
+    <h2>String Manipulation</h2>
+
+    <h3>Replace Characters</h3>
+    <input type="text" id="inputstring" placeholder="Enter the string" />
+    <input type="text" id="chartoreplace" placeholder="Character to replace" />
+    <input type="text" id="newchar" placeholder="New character" />
+    <button onclick="replaceChar()">Replace</button>
+    <p id="stdresult"></p>
+    <p id="manualresult"></p>
+
+    <h3>Check Palindrome</h3>
+    <input type="text" id="palstring" placeholder="e.g., racecar" />
+    <button onclick="checkPalindrome()">Check Standard</button>
+    <button onclick="checkPalindromeManual()">Check Manual</button>
+    <p id="palindromeResult"></p>
+    <p id="manualPalindromeResult"></p>
+
+    <script>
+        function replaceChar() {
+            const inputString = document.getElementById("inputstring").value;
+            const charToReplace = document.getElementById("chartoreplace").value;
+            const newChar = document.getElementById("newchar").value;
+
+            // Standard method
+            const replacedString = inputString.replace(new RegExp(charToReplace, "g"), newChar);
+            document.getElementById("stdresult").textContent = "Replaced String (Standard): " + replacedString;
+
+            // Manual method
+            let manualReplacedString = "";
+            for (let char of inputString) {
+                manualReplacedString += (char === charToReplace) ? newChar : char;
+            }
+            document.getElementById("manualresult").textContent = "Replaced String (Manual): " + manualReplacedString;
+        }
+
+        function checkPalindrome() {
+            const palindromString = document.getElementById("palstring").value;
+            const isPalindrome = palindromString === palindromString.split("").reverse().join("");
+
+            document.getElementById("palindromeResult").textContent = 
+                `"${palindromString}" is ${isPalindrome ? '' : 'not '}a Palindrome!`;
+        }
+
+        function checkPalindromeManual() {
+            const palindromString = document.getElementById("palstring").value;
+            const length = palindromString.length;
+            let manualIsPalindrome = true;
+
+            for (let i = 0; i < Math.floor(length / 2); i++) {
+                if (palindromString[i] !== palindromString[length - 1 - i]) {
+                    manualIsPalindrome = false;
+                    break;
+                }
+            }
+
+            document.getElementById("manualPalindromeResult").textContent = 
+                `"${palindromString}" is ${manualIsPalindrome ? '' : 'not '}a Palindrome (Manual)!`;
+        }
+    </script>
+</body>
+</html>
